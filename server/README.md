@@ -44,18 +44,17 @@ import (
   "gorm.io/gorm"
   "gorm.io/driver/sqlite"
 )
-3、引入mysql到项目中，下载sqlite就有mysql,可以直接引入
+3、引入mysql到项目中
+go get gorm.io/driver/mysql
 import (
-  "gorm.io/driver/sql"
+ "gorm.io/driver/mysql"
 )
 
 # 二、创建数据库、连接数据库
 ### 1.navacat可视化数据库
 新建数据库、设置密码账号
-
-### 2.定义结构体，写入数据库
-
-### 3.连接数据库
+### 2.连接数据库
+### 3.配置连接池、定义结构体、自动迁移
 ### 4.解决主键缺失和表名重复问题
 ### 5.优化定义结构体
 
