@@ -45,9 +45,11 @@ sqlDB.SetConnMaxLifetime(10 * 1000)  //10秒钟
 type List struct {
 	gorm.Model    //解决主键缺失
 	Name         string
-	Email        *string
 	Age          uint8
 	School       string
+	Phone        string
+	Address       string
+
 	
 }
 
@@ -57,6 +59,102 @@ db.AutoMigrate(&List{})
 
 	// 接口
 	r:=gin.Default()
+
+	//错误优先原则、业务码约定：
+	// 成功：200
+	// 失败：400
+
+
+	// 增加：
+	r.POST("/list/add",func(c*gin.Context){
+		var data  List
+		err :=c.ShouldBindJSON(&data)	
+		if err != nil {
+			c.JSON(200,gin.H{
+				"msg":"添加失败",
+				"data":gin.H{},
+				"code":400,
+			})
+		}else{
+			// 操作数据库
+			db.Create(&data)  
+
+			c.JSON(200,gin.H{
+				"msg":"添加成功",
+				"data":gin.H{},
+				"code":400,
+
+			})
+		}
+
+
+	})
+
+	// 删除
+	r.DELETE("/list/delete/:id",func(c*gin.Context){
+		var data  []List
+		// 接收前端传过来的ID
+		id :=c.Param("id")
+		// 判断ID是否存在
+		db.Where("id =?",id).Find(&data)
+
+		// ID存在则进行删除、不存在则进行报错
+		if len(data)==0{
+			c.JSON(200,gin.H{
+				"msg":"id没有找到,删除失败",
+				"code":400,
+
+			})
+		}else{
+			// 操作数据库
+			db.Where("id=?",id).Delete(&data)
+			c.JSON(200,gin.H{
+				"msg":"删除成功",
+				"code":200,
+			})
+		}
+
+	})
+
+
+	// 修改
+	r.PUT("/list/update/:id",func(c*gin.Context){
+		var data  List
+		// 接收前端传过来的ID
+		id :=c.Param("id")
+		// 判断ID是否存在
+		db.Select("id").Where("id =?",id).Find(&data)
+
+		// ID存在则进行修改、不存在则进行报错
+		if data.ID==0{
+			c.JSON(200,gin.H{
+				"msg":"id没有找到,修改失败",
+				"code":400,
+
+			})
+		}else{
+			err :=c.ShouldBindJSON(&data)	
+			if err !=nil{
+				c.JSON(200,gin.H{
+					"msg":"修改失败",
+					"code":400,
+	
+				})
+
+			}else{
+				// 操作数据库
+				db.Where("id=?",id).Updates(&data)
+				c.JSON(200,gin.H{
+					"msg":"修改成功",
+					"code":200,
+	
+				})
+			}
+		}
+
+	})
+
+
 
 
 	// 端口
