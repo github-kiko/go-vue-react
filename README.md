@@ -1,39 +1,70 @@
 # fdd-crud-fullStack
+# author：fangdongdong
+# date：2023年3月11日
 
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+# 项目技术栈：
 
-#### 软件架构
-软件架构说明
+### 前端：
+Vue3.2 + Vite + ElementPlus
 
+### 后端：
+go+gin+gorm+mysql
 
-#### 安装教程
+# 实现功能：实现最简单的crud
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+# 适用人群：
+### 1、学习前端最新技术
+### 2、零基础入门go语言
+### 3、进阶成为全栈工程师
 
 
-#### 特技
+===================================================== 
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+# 后端项目  server
+
+# 一、安装项目相关环境和依赖
+### 1、安装go环境和安装mysql数据库
+
+### 2、新建项目名、初始化项目依赖
+1.新建server项目名，在server下新建main.go入口文件
+2.在server下执行go mod init server  初始化项目依赖，生成go.mod文件
+
+### 3、引入gin到项目中
+1.下载并安装 gin：
+go get -u github.com/gin-gonic/gin
+2.将 gin 引入到代码中：
+import "github.com/gin-gonic/gin"
+
+### 4、引入gorm到项目中
+1.下载安装
+go get -u gorm.io/gorm
+go get -u gorm.io/driver/sqlite
+2.引入gorm
+import (
+  "gorm.io/gorm"
+  "gorm.io/driver/sqlite"
+)
+3、引入mysql到项目中
+go get gorm.io/driver/mysql
+import (
+ "gorm.io/driver/mysql"
+)
+
+# 二、创建数据库、连接数据库
+### 1.navacat可视化数据库
+新建数据库、设置密码账号
+### 2.连接数据库
+### 3.配置连接池、定义结构体、自动迁移
+### 4.解决主键缺失和表名重复问题
+### 5.优化定义结构体
+
+# 三、实现最简单的crud
+### 1.post新增接口
+### 2.put修改接口
+### 3.delete删除接口
+### 4.get条件查询接口
+### 5.get请求全部数据和分页数据
+
+
+
+
