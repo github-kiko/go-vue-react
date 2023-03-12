@@ -8,6 +8,9 @@ import (
 	"gorm.io/driver/mysql"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm/schema"
+	"strconv"
+
+
   )
 
 
@@ -152,6 +155,54 @@ db.AutoMigrate(&List{})
 			}
 		}
 
+	})
+
+	// 查询
+	r.GET("/list/query",func(c*gin.Context){
+		// 获取路径参数
+		var  dataList []List
+
+		    //获取分页参数
+    pageSize, _ := strconv.Atoi(c.Query("pageSize"))
+    page, _ := strconv.Atoi(c.Query("page"))
+
+     // 计算偏移量和限制数量，支持更灵活的分页参数设置
+	 offset := (page - 1) * pageSize
+	 limit := pageSize
+
+    // 返回一个总数
+    var total int64
+    name := c.Query("name")
+
+	fmt.Printf("查询条件：%s\n", name)
+	fmt.Printf("offset: %d\n", offset)
+    fmt.Printf("limit: %d\n", limit)
+
+    db.Model(&List{}).Where("name LIKE ?", fmt.Sprintf("%%%s%%", name)).Count(&total)
+
+    // 条件查询并进行分页
+    db.Where("name LIKE ?", fmt.Sprintf("%%%s%%", name)).Offset(offset).Limit(limit).Find(&dataList)
+	   
+
+
+		//判断是否查询到数据
+		if len(dataList)==0{
+			c.JSON(200,gin.H{
+				"msg":"没有查询到数据",
+				"code":200,
+				"data":gin.H{},
+
+			})
+
+		}else{
+			c.JSON(200,gin.H{
+				"msg":"查询成功",
+				"code":200,
+				"data":dataList,
+				"total":total,
+
+			})
+		}
 	})
 
 
