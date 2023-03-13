@@ -11,8 +11,8 @@ go+gin+gorm+mysql
 
 ### 前端vue：
 Vue3.2 + Vite + ElementPlus+ts
-
 ###  前端react:
+react17+Vite+Material-UI+ts
 
 
 # 适用人群：
