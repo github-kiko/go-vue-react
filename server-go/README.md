@@ -2,36 +2,24 @@
 # author：fangdongdong
 # date：2023年3月11日
 
-# 项目技术栈：
-该项目是一个全栈项目，前后端分离开发，其中包括一个后端，两个前端。
-大家根据自己的需求，自行选择学习其中的一个或者多个项目。
-
-### 后端：
-go+gin+gorm+mysql
-
-### 前端vue：
-Vue3.2 + Vite + ElementPlus+ts
-
-###  前端react:
-react17+Vite+Material-UI+ts
 
 
-# 适用人群：
-### 1、学习前端最新技术
-### 2、零基础入门go语言
-### 3、进阶成为全栈工程师
+# 使用方法：
+1. 新建数据库
+### 数据库名：crud-list
+### 账户名：root
+### 密码：12345678
+### 端口：3306
 
 
-# 实现功能：
-1. 实现最简单的crud
+2. 打包：
+### go build  
+go build ：如果当前项目使用 Go Modules 管理依赖，则编译或运行时会自动下载所需的依赖。
 
 
-# 使用方法
-请查看各项目下的readme文件
-go-vue-react/README.md :项目总体概述
-go-vue-react/server-go/README.md:后端go项目概述
-go-vue-react/web-vue/README.md：前端vue项目概述
-go-vue-react/web-react/README.md：前端react项目概述
+3. 运行打包文件：
+### ./server 
+
 
 
 # 以下是当前后端go开发中使用的一些最新技术栈及其相关资源：
@@ -59,10 +47,7 @@ Kubernetes：Kubernetes是一个开源的容器编排平台，它可以自动化
 
 # 一、安装项目相关环境和依赖
 ### 1、安装go环境和安装mysql数据库
-新建数据库crud-list
-账户名：root
-密码：12345678
-端口：3306
+
 
 ### 2、新建项目名、初始化项目依赖
 1.新建server项目名，在server下新建main.go入口文件
