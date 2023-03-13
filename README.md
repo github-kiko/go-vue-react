@@ -3,17 +3,18 @@
 # date：2023年3月11日
 
 # 项目技术栈：
-该项目是一个全栈项目，前后端分离开发，其中后端是使用的go,前端做了两套，分别使用了vue3.2和react18
-大家根据自己的需求，自行选择学习其中的一个或者多个项目。
+该项目是一个全栈项目，前后端分离开发，其中后端是使用的Go语言,数据库采用的是Mysql.
+前端做了两套，分别使用了Vue 3 和 React 18 技术栈
+大家根据自己的需要，自行选择学习其中的一个或者多个项目。
 
-### 后端：
-go+gin+gorm+mysql
+# 后端：server-go
+### Go + Gin + Gorm + Mysql
 
-### 前端vue：
-Vue3.2 + Vite + ElementPlus+ts
+# 前端：web-vue
+### Vue 3 + TypeScript + Vite + ElementPlus
 
-###  前端react:
-react17+Vite+Material-UI+ts
+# 前端：web-react
+### React18 + TypeScript +Sws +Vite + Material-UI
 
 
 # 适用人群：
@@ -22,16 +23,19 @@ react17+Vite+Material-UI+ts
 ### 3、进阶成为全栈工程师
 
 
+
 # 实现功能：
 1. 实现最简单的crud
 
 
-# 使用方法
-请查看各项目下的readme文件
+# 使用说明：
+请查看对应项目下的readme文件
 go-vue-react/README.md :项目总体概述
 go-vue-react/server-go/README.md:后端go项目概述
 go-vue-react/web-vue/README.md：前端vue项目概述
 go-vue-react/web-react/README.md：前端react项目概述
+
+
 
 
 

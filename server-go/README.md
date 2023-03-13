@@ -1,7 +1,4 @@
-# go-vue-react
-# author：fangdongdong
-# date：2023年3月11日
-
+# go-gin-gorm+mysql
 
 
 # 使用方法：
