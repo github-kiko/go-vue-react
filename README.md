@@ -37,8 +37,6 @@ go-vue-react/web-react/README.md：前端react项目概述
 
 
 
-
-
 # 以下是当前后端go开发中使用的一些最新技术栈及其相关资源：
 
 Go 1.16：Go是一个快速、高效且易于编写的编程语言，用于构建高性能的网络服务器和分布式系统。Go 1.16是最新版本，提供了更好的性能和可选功能。官方网站：https://golang.org/
@@ -56,6 +54,8 @@ Prometheus：Prometheus是一个开源的监控系统和时间序列数据库，
 Docker：Docker是一个开源的容器化平台，它使得应用程序的部署、管理和扩展变得更加容易和可靠。官方网站：https://www.docker.com/
 
 Kubernetes：Kubernetes是一个开源的容器编排平台，它可以自动化容器的部署、扩展、管理和运行，从而简化了应用程序的部署和管理。官方网站：https://kubernetes.io/
+
+
 
 
 
@@ -77,6 +77,8 @@ Kubernetes：Kubernetes是一个开源的容器编排平台，它可以自动化
 
 8. Element Plus：Element Plus是基于Vue.js 3.0的组件库，它提供了一组美观、易于使用、可定制的UI组件，帮助您快速构建高质量的Web应用程序。官方网站：https://element-plus.org/
 
+
+
 # 以下是当前前端react开发中使用的一些最新技术栈及其相关资源：
 
 React 17：React是一个用于构建用户界面的JavaScript库，它采用组件化的方式来构建复杂的交互式应用程序。React 17是最新版本，提供了一些改进和新特性。官方网站：https://reactjs.org/
@@ -94,5 +96,17 @@ Styled Components：Styled Components是一个用于编写CSS的JavaScript库，
 Material-UI：Material-UI是一个用于构建美观且易于使用的React UI组件库，它遵循Google Material Design的设计风格。它提供了大量的可定制组件，可快速构建高质量的用户界面。官方网站：https://material-ui.com/
 
 React Query：React Query是一个数据查询库，它帮助您管理对后端API的请求、缓存和更新。它提供了优雅的API和出色的开箱即用体验。官方网站：https://react-query.tanstack.com/
+
+
+
+
+
+
+
+
+
+
+
+
 
 
