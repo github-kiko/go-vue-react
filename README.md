@@ -61,7 +61,7 @@ Kubernetes：Kubernetes是一个开源的容器编排平台，它可以自动化
 
 # 以下是当前前端vue开发中使用的一些最新技术栈及其相关资源：
 
-1. Vue.js 3.0：Vue.js是一个轻量级的JavaScript框架，用于构建交互式Web界面。Vue.js 3.0是最新版本，提供了更快的渲染速度和更好的性能。官方网站：https://v3.vuejs.org/
+1. Vue.js 3.0：Vue.js是一个轻量级的JavaScript框架，用于构建交互式Web界面。Vue.js 3.0是最新版本，提供了更快的渲染速度和更好的性能。官方网站：https://vuejs.org/
 
 2. Vuex 4.0：Vuex是Vue.js的状态管理模式。它允许您在应用程序中集中管理应用程序的所有组件的状态，并且易于调试和维护。Vuex 4.0是最新版本，具有更好的性能和可扩展性。官方网站：https://next.vuex.vuejs.org/
 
