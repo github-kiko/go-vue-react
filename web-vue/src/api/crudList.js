@@ -1,4 +1,4 @@
-import http from "@/utils/http"
+import http from "../utils/http"
 // 新增
 export  const listadd=params=>http.post('/list/add',params)
 // 删除

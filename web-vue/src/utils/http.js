@@ -1,4 +1,4 @@
-import request from "@/utils/request"
+import request from "./request"
 const http={
     get(url,params){
         return request({
