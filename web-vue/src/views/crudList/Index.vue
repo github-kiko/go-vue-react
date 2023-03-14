@@ -55,6 +55,7 @@ address       string -->
 
 <script setup lang="ts">
 // 引入
+import { listadd,listdelete ,listupdate,listquery} from "@/api/node.js";
 import { ref } from 'vue'
 // import AddDialog from './AddDialog.vue'
 
