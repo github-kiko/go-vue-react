@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CrudList from './views/crudList/index.vue'
+import CrudList from './views/crudList/Index.vue'
 </script>
 
 <template>
