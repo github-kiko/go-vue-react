@@ -7,9 +7,12 @@ const conf = {
     // baseURL: 'http://restapi.amap.com',    //高德
     //  baseURL: 'http://api.map.baidu.com',   //百度
     // baseURL:"/api2",
-     baseURL:" http://127.0.0.1:3000",
+    //  baseURL:" http://127.0.0.1:3000",
+
+    baseURL: '/api', // 根路径
    
     timeout: 90000, // 请求超时时间
+    // withCredentials:true ,
   };
 
   const service = axios.create(conf);
@@ -31,7 +34,8 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response=>{
         // console.log("response:",response);
-        return response
+     const   res =response.data
+        return res
         
     },
    error=>{

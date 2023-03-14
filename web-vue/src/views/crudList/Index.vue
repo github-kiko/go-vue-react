@@ -1,8 +1,8 @@
 <template>
   <div class="crudlist">
     <div class="crudlist-title">
-      <!-- <div>
-        <h1>go-<span class="crudlist-title-red">vue</span>-react全栈小项目</h1>
+      <div>
+        <h1><span class="crudlist-title-red">go-vue-react</span></h1>
 
       </div>
    
@@ -11,7 +11,7 @@
       <p  class="crudlist-title-vue"># Vue 3 + TypeScript + Vite + ElementPlus</p>
       <p  class="crudlist-title-react"># React18 + TypeScript +Sws +Vite + Material-UI</p>
       <p  class="crudlist-title-greenyellow1"># 联系作者请添加微信：fangdongdong_25，备注：go-vue-react</p>
-      </div> -->
+      </div>
      
       
     </div>
@@ -24,7 +24,7 @@
 
     <!-- 列表 -->
     <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="name" label="姓名" />
+      <el-table-column prop="Name" label="姓名" />
       <el-table-column prop="age" label="年龄" />
       <el-table-column prop="school" label="学校" />
       <el-table-column prop="phone" label="手机号" />
@@ -53,7 +53,7 @@
         style="max-width: 360px"
       >
         <el-form-item label="姓名">
-          <el-input v-model="form.name" placeholder="请输入姓名" />
+          <el-input v-model="form.Name" placeholder="请输入姓名" />
         </el-form-item>
         <el-form-item label="年龄">
           <el-input v-model="form.age" placeholder="请输入年龄" />
@@ -102,6 +102,7 @@ const AddDialog = defineAsyncComponent(() => import('./AddDialog.vue'))
 
 import { reactive, ref } from 'vue'
 import { listadd,listdelete ,listupdate,listquery} from "../../api/crudList";
+import { ElMessage } from 'element-plus'
 
 
 
@@ -113,10 +114,20 @@ import { listadd,listdelete ,listupdate,listquery} from "../../api/crudList";
 // data
 const name = ref('')
 
-const tableData = []
+const tableData = ref([
+  {
+    Name: '',
+  age: '',
+  school: '',
+  phone: '',
+  address: '',
+  }
 
-const page = ref(1)
+])
+
+
 const total = ref(0)
+const page = ref(1)
 const pageSize = ref(999)
 const labelPosition = ref('right')
 
@@ -142,10 +153,26 @@ const handleClickEdit = () => {
 
 // 新增
 const addform=async()=>{
-  const { code } = await listadd({ 
+  const { code }= await listadd({ 
        ...form,
+       age:parseInt(form.age)
        }
     );
+
+    // console.log("res===",res);
+    
+
+    if (code==200) {
+      centerDialogVisible.value = false
+      ElMessage({
+        type: 'success',
+        message: '添加成功',
+        showClose: true,
+      })
+      search()
+
+      
+    }
    
 
 
@@ -155,6 +182,7 @@ const addform=async()=>{
 const deleteform=async()=>{
   const { code } = await listdelete({ 
        ...form,
+       age:parseInt(form.age)
        }
     );
    
@@ -165,8 +193,10 @@ const deleteform=async()=>{
 
     // 编辑
  const updateform=async()=>{
+  
   const { code } = await listupdate({ 
-       ...form,
+      //  ...form,
+       age:parseInt(form.age)
        }
     );
    
@@ -178,10 +208,19 @@ const deleteform=async()=>{
 
 // 查询
 const search=async()=>{
-  const { code } = await listquery({ 
+  const { code,data } = await listquery({ 
        name:name.value,
+       page:page.value,
+       pageSize :pageSize .value
+
        }
     );
+    if (code==200) {
+      console.log("data==",data, tableData.value );
+      
+      tableData.value ==data
+      
+    }
    
 
 }
@@ -191,7 +230,7 @@ search()
 // 新增、编辑
 const summitform = () => {
   addform()
-  updateform()
+  // updateform()
 }
 
 

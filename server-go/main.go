@@ -85,7 +85,7 @@ db.AutoMigrate(&List{})
 			c.JSON(200,gin.H{
 				"msg":"添加成功",
 				"data":gin.H{},
-				"code":400,
+				"code":200,
 
 			})
 		}
