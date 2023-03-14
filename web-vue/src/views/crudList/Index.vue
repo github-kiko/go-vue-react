@@ -1,5 +1,20 @@
 <template>
   <div class="crudlist">
+    <div class="crudlist-title">
+      <!-- <div>
+        <h1>go-<span class="crudlist-title-red">vue</span>-react全栈小项目</h1>
+
+      </div>
+   
+      <div>
+      <p  class="crudlist-title-go"># Go + Gin + Gorm + Mysql</p>
+      <p  class="crudlist-title-vue"># Vue 3 + TypeScript + Vite + ElementPlus</p>
+      <p  class="crudlist-title-react"># React18 + TypeScript +Sws +Vite + Material-UI</p>
+      <p  class="crudlist-title-greenyellow1"># 联系作者请添加微信：fangdongdong_25，备注：go-vue-react</p>
+      </div> -->
+     
+      
+    </div>
     <!-- 查询 -->
     <div class="crudlist-query">
       <el-input v-model="input" placeholder="Please input" style="width:200px" />
@@ -17,6 +32,7 @@
       <el-table-column fixed="right" label="操作" width="120">
         <template #default>
           <el-button link type="primary" size="small" @click="handleClickEdit">编辑</el-button>
+          <el-button link type="primary" size="small" @click="handleClickEdit">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -40,7 +56,18 @@ address       string -->
 <script setup lang="ts">
 // 引入
 import { ref } from 'vue'
-import AddDialog from './AddDialog.vue'
+// import AddDialog from './AddDialog.vue'
+
+// const AddDialogRef = ref(null)
+
+// // 注册子组件
+import { defineAsyncComponent } from 'vue'
+const AddDialog = defineAsyncComponent(() => import('./AddDialog.vue'))
+
+
+
+
+
 
 // data
 const input = ref('')
@@ -71,8 +98,10 @@ const tableData = [
 
 // method
 const handleClickEdit = () => {
-  console.log('click', AddDialogRef)
+  console.log('click',AddDialog)
 }
+
+
 
 </script>
 
@@ -93,5 +122,28 @@ const handleClickEdit = () => {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+}
+.crudlist-title{
+  display: flex;
+   flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+}
+.crudlist-title-red{
+  color:red;
+}
+.crudlist-title-go{
+  color:gold;
+
+}
+.crudlist-title-vue{
+  color:green;
+
+}
+.crudlist-title-react{
+  color:pink;
+
 }
 </style>

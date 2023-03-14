@@ -57,6 +57,10 @@ const form = reactive({
 const centerDialogVisible = ref(true)
 const title = ref('新增')
 
+// method
+const show = () => {
+  console.log('click====',)
+}
 
 
 </script>
