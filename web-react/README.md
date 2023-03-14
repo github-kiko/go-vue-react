@@ -10,7 +10,7 @@
 
 # 以下是当前前端react开发中使用的一些最新技术栈及其相关资源：
 
-React 17：React是一个用于构建用户界面的JavaScript库，它采用组件化的方式来构建复杂的交互式应用程序。React 17是最新版本，提供了一些改进和新特性。官方网站：https://reactjs.org/
+React 18：React是一个用于构建用户界面的JavaScript库，它采用组件化的方式来构建复杂的交互式应用程序。React 18是最新版本，提供了一些改进和新特性。官方网站：https://reactjs.org/
 
 Redux Toolkit：Redux Toolkit是Redux工具库的官方建议和最佳实践，它集成了Redux生态系统中最佳的实践，帮助您更快速地编写可维护的Redux代码。官方网站：https://redux-toolkit.js.org/
 
