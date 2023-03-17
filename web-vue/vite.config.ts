@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     /* 是否开启 $ref , vue3.2 的语法糖 */
     vue({
-        refTransform: true,
+      refSugar: true,
         reactivityTransform: true,
     }),
 ],

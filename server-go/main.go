@@ -44,14 +44,15 @@ sqlDB.SetMaxOpenConns(100)
 sqlDB.SetConnMaxLifetime(10 * 1000)  //10秒钟
 
 
-// 结构体
+// 结构体  数据库大写，json小写
 type List struct {
 	gorm.Model    //解决主键缺失
-	Name         string
-	Age          uint8
-	School       string
-	Phone        string
-	Address       string
+	ID           uint8   `json:"id"`
+	Name         string   `json:"name"`
+	Age          uint8     `json:"age"`
+	School       string     `json:"school"`
+	Phone        string      `json:"phone"`
+	Address       string       `json:"address"`
 
 	
 }
