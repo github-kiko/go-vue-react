@@ -100,11 +100,12 @@ address       string -->
 
 // // 注册子组件
 import { defineAsyncComponent } from 'vue'
+import { reactive, ref } from 'vue'
+import { listadd,listdelete,listupdate,listquery} from "../../api/crudList";
+import { ElMessage } from 'element-plus'
 const AddDialog = defineAsyncComponent(() => import('./AddDialog.vue'))
 
-import { reactive, ref } from 'vue'
-import { listadd,listdelete ,listupdate,listquery} from "../../api/crudList";
-import { ElMessage } from 'element-plus'
+
 
 
 
@@ -124,14 +125,33 @@ const page = ref(1)
 const pageSize = ref(999)
 const labelPosition = ref('right')
 
-const form = ref()
+// interface form {
+//   name: string;
+//   id: number;
+//   age:number;
+//   school: string;
+//   phone: string;
+//   address: string;
+// }
+
+const form:any = ref({
+  name:'',
+  id:0,
+  age:0,
+  school:'',
+  phone:'',
+  address:'',
+
+})
+
+
 
 const centerDialogVisible = ref(false)
 const title = ref('新增')
 
 // method
 // 新增编辑弹窗
-const handleClickEdit = (row) => {
+const handleClickEdit = (row:any) => {
   centerDialogVisible.value = true
   form.value=JSON.parse(JSON.stringify(row))
 
@@ -151,8 +171,8 @@ const handleClickEdit = (row) => {
 // 新增
 const addform=async()=>{
   const { code }= await listadd({ 
-       ...form,
-       age:parseInt(form.age)
+       ...form.value,
+       age:parseInt(form.value.age)
        }
     );
 
@@ -176,7 +196,7 @@ const addform=async()=>{
 }
 
 // 删除
-const deleteform=async(row)=>{
+const deleteform=async(row:any)=>{
   const { code } = await listdelete({ 
        id:row.id
        }
@@ -195,10 +215,12 @@ const deleteform=async(row)=>{
 
     // 编辑
  const updateform=async()=>{
+
+  
   
   const { code } = await listupdate({ 
        ...form.value,
-       age:parseInt(form.age)
+       age:parseInt(form.value.age)
        }
     );
     if (code==200) {
