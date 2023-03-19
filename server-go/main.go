@@ -76,7 +76,6 @@ db.AutoMigrate(&List{})
 		if err != nil {
 			c.JSON(200,gin.H{
 				"msg":"添加失败",
-				"data":gin.H{},
 				"code":400,
 			})
 		}else{
@@ -85,7 +84,6 @@ db.AutoMigrate(&List{})
 
 			c.JSON(200,gin.H{
 				"msg":"添加成功",
-				"data":gin.H{},
 				"code":200,
 
 			})
@@ -191,7 +189,7 @@ db.AutoMigrate(&List{})
 			c.JSON(200,gin.H{
 				"msg":"没有查询到数据",
 				"code":200,
-				"data":gin.H{},
+				"data": make([]int, 0),
 
 			})
 

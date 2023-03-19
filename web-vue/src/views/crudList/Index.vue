@@ -19,7 +19,7 @@
     </div>
     <!-- 查询 -->
     <div class="crudlist-query">
-      <el-input @blur="search" v-model="name" placeholder="请输入姓名查询" style="width:200px" />
+      <el-input @blur="blurQuery" v-model="name" placeholder="请输入姓名查询" style="width:200px" />
       <el-button type="primary" @click="handleClickEdit">新增</el-button>
     </div>
 
@@ -41,7 +41,7 @@
 
 
     <!-- 分页 -->
-    <el-pagination v-if="total > 0" class="crudlist-pagination" layout="prev, pager, next" :total="total" />
+    <el-pagination v-if="totalNumber> 0" @current-change="handleCurrentChange" class="crudlist-pagination" layout="prev, pager, next" :total="totalNumber" />
 
     <!-- 添加和编辑 -->
     <!-- <AddDialog ref="AddDialogRef"></AddDialog> -->
@@ -94,16 +94,13 @@ address       string -->
 <script setup lang="ts">
 // 引入
 
-// import AddDialog from './AddDialog.vue'
-
-// const AddDialogRef = ref(null)
 
 // // 注册子组件
 import { defineAsyncComponent } from 'vue'
 import { reactive, ref } from 'vue'
 import { listadd,listdelete,listupdate,listquery} from "../../api/crudList";
 import { ElMessage } from 'element-plus'
-const AddDialog = defineAsyncComponent(() => import('./AddDialog.vue'))
+
 
 
 
@@ -120,9 +117,9 @@ const name = ref('')
 const tableData = ref()
 
 
-const total = ref(0)
+const totalNumber = ref(0)
 const page = ref(1)
-const pageSize = ref(999)
+const pageSize = ref(10)
 const labelPosition = ref('right')
 
 // interface form {
@@ -157,6 +154,14 @@ const handleClickEdit = (row:any) => {
 
 
   
+
+}
+
+//分页
+const handleCurrentChange = (val: number) => {
+  console.log(`current page: ${val}`)
+  page.value=val
+  search()
 
 }
 
@@ -238,12 +243,18 @@ const deleteform=async(row:any)=>{
 
 }
 
+const blurQuery=()=>{
+  page.value=1
+  search()
+
+}
+
 
 
 
 // 查询
 const search=async()=>{
-  const { code,data } = await listquery({ 
+  const { code,data,total} = await listquery({ 
        name:name.value,
        page:page.value,
        pageSize :pageSize .value
@@ -252,6 +263,7 @@ const search=async()=>{
     );
     if (code==200) { 
       tableData.value=data
+      totalNumber.value=total
       
     }
    
