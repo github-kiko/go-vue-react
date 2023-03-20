@@ -61,8 +61,24 @@ type List struct {
 db.AutoMigrate(&List{})
 
 
+
+
 	// 接口
 	r:=gin.Default()
+
+	// 跨域支持
+r.Use(func(c *gin.Context) {
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+	c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+	c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, UPDATE")
+	c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+	if c.Request.Method == "OPTIONS" {
+		c.AbortWithStatus(204)
+		return
+	}
+	c.Next()
+})
+	
 
 	//错误优先原则、业务码约定：
 	// 成功：200
