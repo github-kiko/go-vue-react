@@ -2,20 +2,20 @@
   <div class="crudlist">
     <div class="crudlist-title">
       <div>
-        <h1><span style="margin-right:10px" >go-vue-react</span>全栈小项目</h1>
-      
+        <h1><span style="margin-right:10px">go-vue-react</span>全栈小项目</h1>
+
 
       </div>
-   
+
       <div>
 
-      
-      <p class="crudlist-title-red"># 用市场上最新的主流技术从0到1搭建一个全栈小项目</p>
-      <p class="crudlist-title-red"># 后端使用Go+Mysql，前端做了两套，分别使用了Vue 3 和React 18 两种不同的技术栈</p>
-      <p  class="crudlist-title-greenyellow1"># 联系作者请添加微信：fangdongdong_25，备注：go-vue-react</p>
+
+        <p class="crudlist-title-red"># 用市场上最新的主流技术从0到1搭建一个全栈小项目</p>
+        <p class="crudlist-title-red"># 后端使用Go+Mysql，前端做了两套，分别使用了Vue 3 和React 18 两种不同的技术栈</p>
+        <p class="crudlist-title-greenyellow1"># 联系作者请添加微信：fangdongdong_25，备注：go-vue-react</p>
       </div>
-     
-      
+
+
     </div>
     <!-- 查询 -->
     <div class="crudlist-query">
@@ -41,19 +41,15 @@
 
 
     <!-- 分页 -->
-    <el-pagination v-if="totalNumber> 0" @current-change="handleCurrentChange" class="crudlist-pagination" layout="prev, pager, next" :total="totalNumber" />
+    <el-pagination v-if="totalNumber > 0" @current-change="handleCurrentChange" class="crudlist-pagination"
+      layout="prev, pager, next" :total="totalNumber" />
 
     <!-- 添加和编辑 -->
     <!-- <AddDialog ref="AddDialogRef"></AddDialog> -->
 
     <el-dialog v-model="centerDialogVisible" :title="title" width="50%" center>
-      
-      <el-form
-        :label-position="labelPosition"
-        label-width="100px"
-        :model="form"
-        style="max-width: 360px"
-      >
+
+      <el-form :label-position="labelPosition" label-width="100px" :model="form" style="max-width: 360px">
         <el-form-item label="姓名">
           <el-input v-model="form.name" placeholder="请输入姓名" />
         </el-form-item>
@@ -69,18 +65,18 @@
         <el-form-item label="地址">
           <el-input v-model="form.address" placeholder="请输入地址" />
         </el-form-item>
-    
+
       </el-form>
-    
-        <template #footer>
-          <span class="dialog-footer">
-            <el-button @click="centerDialogVisible = false">取消</el-button>
-            <el-button type="primary" @click="summitform">
-              确认
-            </el-button> 
-          </span>
-        </template>
-      </el-dialog>
+
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="centerDialogVisible = false">取消</el-button>
+          <el-button type="primary" @click="summitform">
+            确认
+          </el-button>
+        </span>
+      </template>
+    </el-dialog>
 
   </div>
 </template>
@@ -96,10 +92,23 @@ address       string -->
 
 
 // // 注册子组件
-import { defineAsyncComponent } from 'vue'
-import { reactive, ref } from 'vue'
-import { listadd,listdelete,listupdate,listquery} from "../../api/crudList";
+import { ref } from 'vue'
+import { listadd, listdelete, listupdate, listquery } from "../../api/crudList";
 import { ElMessage } from 'element-plus'
+
+
+
+
+interface FormType {
+  name: string;
+  id: number;
+  age: number;
+  school: string;
+  phone: string;
+  address: string;
+}
+
+
 
 
 
@@ -122,22 +131,15 @@ const page = ref(1)
 const pageSize = ref(10)
 const labelPosition = ref('right')
 
-// interface form {
-//   name: string;
-//   id: number;
-//   age:number;
-//   school: string;
-//   phone: string;
-//   address: string;
-// }
 
-const form:any = ref({
-  name:'',
-  id:0,
-  age:0,
-  school:'',
-  phone:'',
-  address:'',
+
+const form: any = ref({
+  name: '',
+  id: 0,
+  age: 0,
+  school: '',
+  phone: '',
+  address: '',
 
 })
 
@@ -148,19 +150,19 @@ const title = ref('新增')
 
 // method
 // 新增编辑弹窗
-const handleClickEdit = (row:any) => {
+const handleClickEdit = (row: FormType) => {
   centerDialogVisible.value = true
-  form.value=JSON.parse(JSON.stringify(row))
+  form.value = JSON.parse(JSON.stringify(row))
 
 
-  
+
 
 }
 
 //分页
 const handleCurrentChange = (val: number) => {
   console.log(`current page: ${val}`)
-  page.value=val
+  page.value = val
   search()
 
 }
@@ -174,77 +176,67 @@ const handleCurrentChange = (val: number) => {
 
 
 // 新增
-const addform=async()=>{
-  const { code }= await listadd({ 
-       ...form.value,
-       age:parseInt(form.value.age)
-       }
-    );
+const addform = async () => {
+  const { code } = await listadd({
+    ...form.value,
+    age: parseInt(form.value.age)
+  }
+  );
+
+  if (code == 200) {
+    centerDialogVisible.value = false
+    ElMessage({
+      type: 'success',
+      message: '添加成功',
+      showClose: true,
+    })
+    search()
 
 
-    
-
-    if (code==200) {
-      centerDialogVisible.value = false
-      ElMessage({
-        type: 'success',
-        message: '添加成功',
-        showClose: true,
-      })
-      search()
-
-      
-    }
-   
-
-
+  }
 }
 
 // 删除
-const deleteform=async(row:any)=>{
-  const { code } = await listdelete({ 
-       id:row.id
-       }
-    );
+const deleteform = async (row: FormType) => {
+  const { code } = await listdelete({
+    id: row.id
+  });
+  if (code == 200) {
     ElMessage({
-        type: 'success',
-        message: '删除成功',
-        showClose: true,
-      })
-      search()
-   
+      type: 'success',
+      message: '删除成功',
+      showClose: true,
+    })
+    search()
+
+  }
+}
+
+
+// 编辑
+const updateform = async () => {
+  const { code } = await listupdate({
+    ...form.value,
+    age: parseInt(form.value.age)
+  }
+  );
+  if (code == 200) {
+    centerDialogVisible.value = false
+    ElMessage({
+      type: 'success',
+      message: '修改成功',
+      showClose: true,
+    })
+    search()
+
+
+  }
 
 
 }
 
-
-    // 编辑
- const updateform=async()=>{
-
-  
-  
-  const { code } = await listupdate({ 
-       ...form.value,
-       age:parseInt(form.value.age)
-       }
-    );
-    if (code==200) {
-      centerDialogVisible.value = false
-      ElMessage({
-        type: 'success',
-        message: '修改成功',
-        showClose: true,
-      })
-      search()
-
-      
-    }
-   
-
-}
-
-const blurQuery=()=>{
-  page.value=1
+const blurQuery = () => {
+  page.value = 1
   search()
 
 }
@@ -253,20 +245,20 @@ const blurQuery=()=>{
 
 
 // 查询
-const search=async()=>{
-  const { code,data,total} = await listquery({ 
-       name:name.value,
-       page:page.value,
-       pageSize :pageSize .value
+const search = async () => {
+  const { code, data, total } = await listquery({
+    name: name.value,
+    page: page.value,
+    pageSize: pageSize.value
 
-       }
-    );
-    if (code==200) { 
-      tableData.value=data
-      totalNumber.value=total
-      
-    }
-   
+  }
+  );
+  if (code == 200) {
+    tableData.value = data
+    totalNumber.value = total
+
+  }
+
 
 }
 
@@ -276,9 +268,9 @@ search()
 const summitform = () => {
   if (!form.value.id) {
     addform()
-    
-  }else{
-      updateform()
+
+  } else {
+    updateform()
 
   }
 
@@ -310,27 +302,32 @@ const summitform = () => {
   align-items: center;
   margin-top: 20px;
 }
-.crudlist-title{
+
+.crudlist-title {
   display: flex;
-   flex-direction: column;
+  flex-direction: column;
 
   justify-content: center;
   align-items: center;
 
 }
-.crudlist-title-red{
-  color:red;
+
+.crudlist-title-red {
+  color: red;
 }
-.crudlist-title-go{
-  color:gold;
+
+.crudlist-title-go {
+  color: gold;
 
 }
-.crudlist-title-vue{
-  color:green;
+
+.crudlist-title-vue {
+  color: green;
 
 }
-.crudlist-title-react{
-  color:pink;
+
+.crudlist-title-react {
+  color: pink;
 
 }
 </style>
